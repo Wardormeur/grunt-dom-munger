@@ -27,6 +27,28 @@ module.exports.common = [
         "ng-submit": "defined"
       }
     }
-  }
+  },
+	{
+		"selector": "a",
+		"rules": {
+			"attr": {
+					"ng-href": "defined"
+				},
+			"attr": {
+					"ng-sref" : "defined"
+				}
+		}
+	},
+	{
+		"selector" : "input",
+		"rules" : {
+			"attr": {
+				"name" : "defined"
+			},
+			"prev": {
+				"label": "defined"
+			}
+		}
+	}
 
 ];

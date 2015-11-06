@@ -22,48 +22,63 @@ module.exports = function(grunt) {
     if(options.ruleset){
       options.ruleset = toArray(options.ruleset);
       options.ruleset.forEach(function(option) {
-      	options.ruleset[option] = (require('grunt-dom-validator/validators/'+option+'.js'))[option]; ///common.js
+      	options.ruleset[option] = (require('grunt-dom-validator/ruleset/'+option+'.js'))[option]; ///common.js
+        // grunt.log.writeln(JSON.stringify(options.ruleset[option]));
         //We loop over elements
-        options.ruleset[option].forEach(function(rule){
-           var selector = rule.selector;
+        options.ruleset[option].forEach(function(ruleset){
+           var selector = ruleset.selector;
             //We get occurences
             var vals = $(selector).map(function(i,elem){
               return $(elem);
             });
             //Process rules
             vals.forEach(function(elem){
-              for (var elem_rule in rule.rules) {
-                  var fn = rule.rules;
-                for (var ruleProperty in fn[elem_rule]){
-                  var target = elem[elem_rule](ruleProperty);
-                  var ruleValue = fn[elem_rule][ruleProperty];
-                  var respected = true;
-                  //Check for specific keywords
-                  if(ruleValue === 'defined'){
-                    if(!target){
-                      respected = false;
-                    }
-                  }else if( ruleValue === 'forbidden' ){ //
-                    if(target){
-                      respected = false;
-                    }
-                  }else{//We look for specific values
-                    if(grunt.util.kindOf(ruleValue) === 'array'){
-                      respected = ruleValue.indexOf(target) >= 0 ;
-                    }else{
-                      respected = target === ruleValue;
-                    }
+              var fn = ruleset.rules;
+              var violations = [];
+              for (var rule in fn) {
+                  //We check tuhe rules one by one
+                  if(typeof(fn[rule]) === 'function'){
+                      if(!fn[rule](elem)){
+                        violations.push({rule:rule});
+                      }
+                  }else{
+                    for (var ruleProperty in fn[rule]){
+                        var ruleValue = fn[rule][ruleProperty];
+                        var respectedRule = true;
+                        var target = elem[rule](ruleProperty);
+                        //Check for specific keywords
+                        if(ruleValue === 'defined'){
+                          if(!target){
+                            respectedRule = false;
+                          }
+                        }else if( ruleValue === 'forbidden' ){ //
+                          if(target){
+                            respectedRule = false;
+                          }
+                        }else{//We look for specific values
+                          if(grunt.util.kindOf(ruleValue) === 'array'){
+                            respectedRule = ruleValue.indexOf(target) >= 0 ;
+                          }else{
+                            respectedRule = target === ruleValue;
+                          }
 
+                        }
+                        if(!respectedRule){
+                          violations.push({rule:ruleProperty});
+                        }
+                      }
+                    }
                   }
-                  if(!respected){
-                    grunt.log.writeln('Error found for selector "'+selector+'" for rule "'+ elem_rule + ':'+ ruleProperty +'" in file '+f );
-                    elem.innerHtml = '';
+                  if(violations.length > 0){
+                    grunt.log.write('Error found for selector "'+ selector +'" in file '+f );
+                    violations.forEach(displayRuleError);
                     grunt.log.verbose.writeln('Faulty element is '+ elem.empty());
                   }
-                }
-              }
             });
 
+            function displayRuleError(rule){
+              grunt.log.writeln(' for rule "'+ rule.rule+'"');
+            }
 
             grunt.config(['dom_validator','data',selector],vals);
           }
