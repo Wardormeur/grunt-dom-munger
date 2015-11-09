@@ -16,6 +16,25 @@ module.exports.ngmd = [
 				"class": ['single-button','wrapped-buttons','inline-buttons']
 			}
 		}
-	}
+	},
+	{
+    "selector" : "md-card",
+    "rules": {
+      "find": {
+        ".main-card-container": "defined"
+      },
+      "find": {
+        "md-content": "defined"
+      }
+    }
+  },
+  {
+    "selector" : "md-tab",
+    "rules" : {
+      "parent" : {
+        "md-tabs" : "defined"
+      }
+    }
+  }
 
 ];

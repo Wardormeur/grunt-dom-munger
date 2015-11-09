@@ -138,5 +138,46 @@ module.exports.ngmd = [
 				"ng-model" : "defined"
 			}
 		}
+	},
+	{
+		"selector" : "md-list-item",
+		"rules" : {
+			"parent" : {
+				"md-list" : "defined"
+			}
+		}
+	},
+	{
+		"selector" : "md-menu-bar",
+		"rules" : {
+			"parent" : {
+				"md-menu" : "defined"
+			}
+		}
+	},
+	{
+		"selector" : "md-tab",
+		"rules" : {
+			"parent" : {
+				"md-tabs" : "defined"
+			}
+		}
+	},
+	{
+		"selector" : "md-grid-list",
+		"rules" : {
+			"find" : {
+				"md-grid-tile" : "defined"
+			}
+		}
+	},
+	{
+		"selector" : "md-grid-tile",
+		"rules" : {
+			"parent" : {
+				"md-grid-list" : "defined"
+			}
+		}
 	}
+
 ];

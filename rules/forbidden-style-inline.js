@@ -1,9 +1,12 @@
+module.exports.rules.forbidden_style_inline =
 {
   "attr": {
-  "style": "forbidden"
+    "selector": "style",
+    "value": null ,
+    "quantity": "0"
   },
-  "error":{
+  "error": {
     "type": "blocker",
-    "Inline style is forbidden"
+    "message" : "Inline style is forbidden"
   }
-}
+};
