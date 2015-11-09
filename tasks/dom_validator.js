@@ -70,14 +70,14 @@ module.exports = function(grunt) {
                     }
                   }
                   if(violations.length > 0){
-                    grunt.log.write('Error found for selector "'+ selector +'" in file '+f );
+                    grunt.log.write('Error found for selector "'+ selector['yellow'] +'" in file '+f);
                     violations.forEach(displayRuleError);
                     grunt.log.verbose.writeln('Faulty element is '+ elem.empty());
                   }
             });
 
             function displayRuleError(rule){
-              grunt.log.writeln(' for rule "'+ rule.rule+'"');
+              grunt.log.writeln(' for rule "'+ rule.rule['yellow']+'"');
             }
 
             grunt.config(['dom_validator','data',selector],vals);
