@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/Wardormeur/grunt-dom-munger.png?label=ready&title=Ready)](https://waffle.io/Wardormeur/grunt-dom-munger)
 # grunt-dom-validator
 
 > Read HTML documents using CSS selectors.
