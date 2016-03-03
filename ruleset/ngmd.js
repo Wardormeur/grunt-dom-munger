@@ -32,17 +32,22 @@ module.exports.ngmd = [
 		"rules": {
 			"find": {
 				".md-actions": "defined"
-			},
-			"parent":{
-				"md-dialog-content": "defined"
 			}
 		}
 	},
 	{
-		"selector" : ".md-dialog-content",
+		"selector" : ".md-dialog-content, md-dialog-content",
 		"rules": {
 			"parent": {
-				"md-dialog-content" : "defined"
+				"md-dialog" : "defined"
+			}
+		}
+	},
+	{
+		"selector" : ".md-actions, md-dialog-actions",
+		"rules": {
+			"parent": {
+				"md-dialog" : "defined"
 			}
 		}
 	},
@@ -54,9 +59,6 @@ module.exports.ngmd = [
 			},
 			"attr":	{
 					"aria-label": "defined"
-			},
-			"find":{
-				"md-icon": "defined"
 			}
 		}
 	},

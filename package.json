@@ -1,11 +1,11 @@
 {
   "name": "grunt-dom-validator",
   "description": "Read DOMwith CSS selectors. Callback for stats, lisibility tests, framework compliance and teamwork guidelines",
-  "version": "0.0.1",
+  "version": "0.0.1-rc2",
   "homepage": "https://github.com/wardormeur/grunt-dom-munger",
   "author": {
     "name": "Wardormeur",
-    "email": ""
+    "email": "wardormeur@gmail.com"
   },
   "repository": {
     "type": "git",
@@ -24,13 +24,10 @@
   "engines": {
     "node": ">= 0.8.0"
   },
-  "scripts": {
-    "test": "grunt test"
-  },
   "devDependencies": {
-    "grunt-contrib-clean": "~0.4.0",
     "grunt": "~0.4.1",
-    "grunt-contrib-nodeunit": "~0.3.0"
+    "grunt-contrib-jshint": "^0.12.0",
+    "grunt-contrib-nodeunit": "^0.4.1"
   },
   "peerDependencies": {
     "grunt": "~0.4.1"

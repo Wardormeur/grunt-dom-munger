@@ -22,52 +22,80 @@ module.exports = function(grunt) {
         jshintrc: '.jshintrc',
       },
     },
-    // Before generating any new files, remove any previously-created files.
-    clean: {
-      tests: ['tmp'],
-    },
     // Configuration to be run (and then tested).
-    dom_munger: {
-      test: {
+    dom_validator: {
+      common: {
         options: {
-            $('#filepath').text('Made from ' + file);
-          }
+            ruleset: [
+              {
+                name: 'common',
+                src: 'ruleset/common.js'
+              }
+            ]
         },
-        src: 'test/fixtures/index.html',
+        src: 'test/common/common.html',
       },
-      test2: {
+      testFunction:{
         options: {
-          read: {selector:'script',attribute:'src',writeto:'test',isPath:true}
+            ruleset: [
+              {
+                name: 'ruleset',
+                src: 'test/ruleset.js'
+              }
+            ]
         },
-        src: 'test/fixtures/index.html'
+        src: 'test/common/function.html',
       },
-      test_callback_read: {
+      testSelectorAttr:{
         options: {
-          callback: function ($, file) {
-            return false;
-          }
+            ruleset: [
+              {
+                name: 'ruleset',
+                src: 'test/ruleset.js'
+              }
+            ]
         },
-        src: 'test/fixtures/formatted.html'
+        src: 'test/common/attr.html',
       },
-    write_src: {
-      test: {
-        src: ['<%= dom_munger.data.links_order %>','<%= dom_munger.data.scripts_order %>']
-      }
+    //   testParent:{
+    //     options: {
+    //         ruleset: [
+    //           {
+    //             name: 'ruleset',
+    //             src: 'test/ruleset.js'
+    //           }
+    //         ]
+    //     },
+    //     src: 'test/common/parent.html',
+    //   },
+    //   testClosest:{
+    //     options: {
+    //         ruleset: [
+    //           {
+    //             name: 'ruleset',
+    //             src: 'test/ruleset.js'
+    //           }
+    //         ]
+    //     },
+    //     src: 'test/common/selector-parent.html',
+    //   },
     },
     // Unit tests.
     nodeunit: {
       tests: ['test/*_test.js'],
-    },
+    }
 
   });
 
   // Actually load this plugin's task(s).
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-nodeunit');
   grunt.loadTasks('tasks');
 
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'dom_munger', 'write_src', 'concat', 'nodeunit']);
+  grunt.registerTask('test', ['nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', [ 'test']);

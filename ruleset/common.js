@@ -14,10 +14,25 @@ module.exports.common = [
 			"closest": {
 				"form": "defined"
 			},
+			"respectTypeActionClick": function (elem){
+						if(elem.is('[ng-click]') && elem.attr('type') === 'button'){
+							return true;
+						}
+						else{
+							return false;
+						}
+				},
+			"respectTypeActionSubmit": function (elem){
+					if(!elem.is('[ng-click]') && elem.attr('type') === 'submit'){
+						return true;
+					}
+					else{
+						return false;
+					}
+			}	,
 			"attr": {
-			 	"type": ["button", "submit"]
+				"type": ["button", "submit"]
 			}
-
 		}
 	},
   {
@@ -31,12 +46,19 @@ module.exports.common = [
 	{
 		"selector": "a",
 		"rules": {
-			"attr": {
-					"ng-href": "defined"
-				},
-			"attr": {
-					"ng-sref" : "defined"
+			"respectLink" : function(elem){
+				// https://docs.angularjs.org/api/ng/directive/ngHref
+				// if using ngclick, you should have an href also
+				if(elem.is('[ng-click]') && elem.is('[href]')
+					|| elem.is('[ng-href]')
+					|| elem.is('[ui-sref]')
+				  || elem.is('[href]')){
+          return true;
+        }
+				else{
+					return false;
 				}
+			}
 		}
 	},
 	{
