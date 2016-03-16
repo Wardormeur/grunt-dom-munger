@@ -29,7 +29,7 @@ module.exports = function(grunt) {
             ruleset: [
               {
                 name: 'common',
-                src: 'ruleset/common.js'
+                src: 'rules/common/*.js'
               }
             ]
         },
@@ -39,8 +39,8 @@ module.exports = function(grunt) {
         options: {
             ruleset: [
               {
-                name: 'ruleset',
-                src: 'test/ruleset.js'
+                name: 'common',
+                src: 'rules/common/*.js'
               }
             ]
         },
@@ -50,8 +50,8 @@ module.exports = function(grunt) {
         options: {
             ruleset: [
               {
-                name: 'ruleset',
-                src: 'test/ruleset.js'
+                name: 'common',
+                src: 'rules/common/*.js'
               }
             ]
         },

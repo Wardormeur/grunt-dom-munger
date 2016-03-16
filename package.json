@@ -39,6 +39,11 @@
     "cheerio"
   ],
   "dependencies": {
-    "cheerio": "~0.12.3"
+    "chai": "^3.5.0",
+    "chai-cheerio": "^1.0.0",
+    "cheerio": "~0.12.3",
+    "glob": "^7.0.0",
+    "json-logic-js": "^1.0.1",
+    "traverse": "^0.6.6"
   }
 }
